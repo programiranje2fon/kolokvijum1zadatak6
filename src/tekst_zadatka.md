@@ -21,13 +21,13 @@ Napraviti javnu klasu **TaksiFirma** u paketu **taksi.firma** koja ima:
 
 * Privatni atribut **vozila** koji predstavlja niz objekata klase TaksiVozilo. Odmah inicijalizovati niz na kapacitet 1000.
 
-* Javnu metodu **unesiTaksistu** koja kao parametre prima objekat klase TaksiVozilo i unosi ga na kraj niza, odnosno na ono slobodno mesto koje je najbliže kraju niza. Posle unosa, potrebno je postaviti da brojPoziva bude nula i da taksi bude slobodan. 
+* Javnu metodu **unesiTaksistu** koja kao parametre prima objekat klase TaksiVozilo i unosi ga na kraj niza, odnosno na ono slobodno mesto koje je najbliže kraju niza (mesto je slobodno ako element niza ima NULL vrednost). Ako u nizu nema slobodnih mesta, ispisati na ekranu "NEMA MESTA". Posle uspešnog unosa, potrebno je postaviti da brojPoziva bude nula i da taksi bude slobodan.
 
 * Javnu metodu **primiPoziv** koja kao ima tri parametra: taksi broj (ceo broj), ime vozača (String) i prezime vozača (String). Metoda na osnovu unetih parametara pronalazi traženog taksistu, povećava njegov broj poziva za jedan, i postavlja da nije slobodan. Obratiti pažnju na prazna mesta u nizu i na to da je atribut id klase taksista u formatu „TAKSI_BROJ IME PREZIME“. Ako je taksisti prošao kraj smene, ispisati poruku "KRAJ SMENE" i ne vršiti izmene. Ako taksista sa datim podacima ne postoji, ispisati poruku "NE POSTOJI".
 
 * Javnu metodu **uredi** koja preuređuje redosled taksi vozila iz niza tako da se na početku nalaze sva slobodna taksi vozila, a na kraju sva zauzeta taksi vozila.
 
-Napraviti javnu klasu **ProbaTaksiFirma** u paketu **taksi.firma.proba** koja u main metodi pravi jedan objekat klase TaksiFirma i unosi dva objekta klase TaksiVozila: "122 Marko Markovic", broj voznji 0, trenutno slobodan, koji zavrsava smenu u 23:59h trenutnog dana (dana kad je pokrenut program), i "333 Zika Petrovic", broj voznji 7, trenutno nije slobodan, koji zavrsava smenu u 22:22h trenutnog dana.
+Napraviti javnu klasu **ProbaTaksiFirma** u paketu **taksi.firma.proba** koja u main metodi pravi jedan objekat klase TaksiFirma i unosi dva objekta klase TaksiVozila: "122 Marko Markovic", broj poziva 0, trenutno slobodan, koji zavrsava smenu u 23:59h trenutnog dana (dana kad je pokrenut program), i "333 Zika Petrovic", broj poziva 7, trenutno nije slobodan, koji zavrsava smenu u 22:22h trenutnog dana.
 
 # Zadatak 2 (ispravka koda)
 
