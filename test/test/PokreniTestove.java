@@ -18,7 +18,7 @@ public class PokreniTestove {
 
 	public static void main(String[] args) {
 		runTestsForClass(taksi.TaksiVoziloTest.class);
-		//runTestsForClass(prodavnica.ProdavnicaAutoDelovaTest.class);
+		runTestsForClass(taksi.firma.TaksiFirmaTest.class);
 		runTestsForClass(ispravka_koda.Ispisivac4Test.class);
 	}
 

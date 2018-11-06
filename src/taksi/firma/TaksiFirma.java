@@ -14,7 +14,6 @@ public class TaksiFirma {
 			if (vozila[i] == null) {
 				vozila[i] = tv;
 				vozila[i].setBrojPoziva(0);
-				vozila[i].setSlobodan(true);
 				return;
 			}
 		
@@ -24,7 +23,7 @@ public class TaksiFirma {
 	public void primiPoziv(int taksiBroj, String ime, String prezime) {
 		for (int i=0; i<vozila.length;i++)
 			if (vozila[i] != null &&
-				vozila[i].getId().equals(taksiBroj+' '+ime+' '+prezime)) {
+				vozila[i].getId().equals(""+taksiBroj+" "+ime+" "+prezime)) {
 				
 				if (vozila[i].getKrajSmene().before(new GregorianCalendar())) {
 					System.out.println("KRAJ SMENE");
@@ -39,7 +38,7 @@ public class TaksiFirma {
 		System.out.println("NE POSTOJI");	
 	}
 	
-	public void preuredi() {
+	public void uredi() {
 		//Pomocni niz u koji ce biti uneta vozila u zeljenom redosledu		
 		TaksiVozilo[] pom = new TaksiVozilo[1000];
 		
