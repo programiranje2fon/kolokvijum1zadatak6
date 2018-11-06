@@ -47,7 +47,7 @@ Dati kod se kompajlira, ali ne radi to šta treba. Napraviti klasu **Ispisivac4*
 	class Ispisivac4 {
 	static void ispisiPiramidu() {
 		int prazno=4, nula = 1;
-		for (int i = 1; i >= 5; i++){
+		for (int i = 1; i <= 5; i--){
 			for (int j=1;j<prazno+nula;j++)
 				if (j<=prazno)System.out.print(' ');
 				else System.out.print('0');
