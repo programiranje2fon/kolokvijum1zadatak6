@@ -1,0 +1,197 @@
+package taksi;
+
+import java.util.GregorianCalendar;
+
+public class TaksiVozilo {
+	
+	private String id;
+	
+	private int brojPoziva;
+	
+	private boolean slobodan;
+	
+	private GregorianCalendar krajSmene;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		if (id == null || id.length() < 10 || id.length() > 30)
+			System.out.println("GRESKA");
+		else
+			this.id = id;
+	}
+
+	public int getBrojPoziva() {
+		return brojPoziva;
+	}
+
+	public void setBrojPoziva(int brojPoziva) {
+		if (brojPoziva < 0)
+			System.out.println("GRESKA");
+		else				
+			this.brojPoziva = brojPoziva;
+	}
+
+	public boolean isSlobodan() {
+		return slobodan;
+	}
+
+	public void setSlobodan(boolean slobodan) {
+		this.slobodan = slobodan;
+	}
+
+	public GregorianCalendar getKrajSmene() {
+		return krajSmene;
+	}
+
+	public void setKrajSmene(GregorianCalendar krajSmene) {
+		if (krajSmene == null || krajSmene.before(new GregorianCalendar()))
+				System.out.println("GRESKA");
+			else				
+				this.krajSmene = krajSmene;
+	}
+
+	@Override
+	public String toString() {
+		return "TaksiVozilo [id=" + id + ", brojPoziva=" + brojPoziva + ", slobodan=" + slobodan + ", krajSmene="
+				+ krajSmene + "]";
+	}
+
+}
+
+package taksi.firma;
+
+import java.util.GregorianCalendar;
+
+import taksi.TaksiVozilo;
+
+public class TaksiFirma {
+	
+	private TaksiVozilo[] vozila = new TaksiVozilo[1000];
+	
+	
+	public void unesiTaksistu(TaksiVozilo tv) {
+		for (int i=vozila.length-1; i>=0;i--)
+			if (vozila[i] == null) {
+				vozila[i] = tv;
+				vozila[i].setBrojPoziva(0);
+				return;
+			}
+		
+		System.out.println("NEMA MESTA");
+	}
+	
+	public void primiPoziv(int taksiBroj, String ime, String prezime) {
+		for (int i=0; i<vozila.length;i++)
+			if (vozila[i] != null &&
+				vozila[i].getId().equals(""+taksiBroj+" "+ime+" "+prezime)) {
+				
+				if (vozila[i].getKrajSmene().before(new GregorianCalendar())) {
+					System.out.println("KRAJ SMENE");
+					return;
+				}
+				
+				vozila[i].setBrojPoziva(vozila[i].getBrojPoziva()+1);
+				vozila[i].setSlobodan(false);
+				return;
+			}
+		
+		System.out.println("NE POSTOJI");	
+	}
+	
+	public void uredi() {
+		//Pomocni niz u koji ce biti uneta vozila u zeljenom redosledu		
+		TaksiVozilo[] pom = new TaksiVozilo[1000];
+		
+		int brojacSlobodnih = 0;
+		int brojacZauzetih = 0;
+		
+		for (int i=0; i<vozila.length; i++)
+			if (vozila[i] != null)
+				if (vozila[i].isSlobodan()) {
+					pom[brojacSlobodnih] = vozila[i];
+					brojacSlobodnih++;
+				}
+				else {
+					pom[999-brojacZauzetih] = vozila[i];
+					brojacZauzetih++;
+				}
+		
+		//Atribut vozila dobija vrednost pomocnog niza, radi se preusmerenje 
+		vozila = pom;
+	}
+
+}
+
+package taksi.firma.proba;
+
+import java.util.GregorianCalendar;
+
+import taksi.TaksiVozilo;
+import taksi.firma.TaksiFirma;
+
+public class ProbaTaksiFirma {
+
+	public static void main(String[] args) {
+		TaksiFirma tf = new TaksiFirma();
+
+		TaksiVozilo tv1 = new TaksiVozilo();
+		tv1.setId("122 Marko Markovic");
+		tv1.setBrojPoziva(0);
+		tv1.setSlobodan(true);
+		
+		GregorianCalendar dat = new GregorianCalendar();
+		dat.set(dat.get(GregorianCalendar.YEAR), 
+				dat.get(GregorianCalendar.MONTH),
+				dat.get(GregorianCalendar.DAY_OF_MONTH), 
+				23, 59, 0);
+		tv1.setKrajSmene(dat);
+		
+		tf.unesiTaksistu(tv1);
+		
+		TaksiVozilo tv2 = new TaksiVozilo();
+		tv2.setId("333 Zika Petrovic");
+		tv2.setBrojPoziva(7);
+		tv2.setSlobodan(false);
+		
+		dat = new GregorianCalendar();
+		dat.set(dat.get(GregorianCalendar.YEAR), 
+				dat.get(GregorianCalendar.MONTH),
+				dat.get(GregorianCalendar.DAY_OF_MONTH), 
+				22, 22, 0);
+		tv2.setKrajSmene(dat);
+		
+		tf.unesiTaksistu(tv2);
+	}
+
+}
+
+package ispravka_koda;
+
+class Ispisivac4 {
+	static void ispisiPiramidu() {
+		int prazno = 4, nula = 1;
+		for (int i = 1; i <= 5; i++) {
+			for (int j = 1; j < prazno + nula*2; j++)
+				if (j <= prazno)
+					System.out.print(' ');
+				else
+					System.out.print('0');
+			System.out.println();
+			prazno--;
+			nula++;
+		}
+	}
+}
+
+package ispravka_koda;
+
+public class ProbaIspisivac4 {
+
+	public static void main(String[] args) {
+		Ispisivac4.ispisiPiramidu();
+	}
+
+}
